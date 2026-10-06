@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Ember & Oak — wood-fired kitchen in Portland. Seasonal menu, open hearth, book your table." />
+  <title>Ember &amp; Oak — Wood-Fired Kitchen</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="site-header" id="siteHeader">
+    <nav class="nav-inner" aria-label="Main navigation">
+      <a href="#home" class="logo">Ember <span>&amp;</span> Oak</a>
+      <button id="hamburger" class="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks">
+        <span></span><span></span><span></span>
+      </button>
+      <ul id="navLinks" class="nav-links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#menu">Menu</a></li>
+        <li><a href="#hours">Hours</a></li>
+        <li><a href="#reserve" class="btn btn-primary nav-cta">Reserve a table</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section id="home" class="hero">
+      <div class="hero-overlay"></div>
+      <div class="container hero-content">
+        <p class="hero-kicker">Wood-fired kitchen &middot; Portland, OR</p>
+        <h1>Slow food,<br />cooked over <em>live fire</em></h1>
+        <p class="hero-sub">Seasonal Pacific Northwest ingredients, an oak-burning hearth, and a dining room built for lingering. Dinner Tuesday through Sunday.</p>
+        <div class="hero-ctas">
+          <a href="#reserve" class="btn btn-primary btn-lg">Book a table</a>
+          <a href="#menu" class="btn btn-outline btn-lg">View the menu</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="about">
+      <div class="container about-grid">
+        <div>
+          <h2>From our hearth to your table</h2>
+          <p>Everything at Ember &amp; Oak touches oak fire before it touches your plate — flatbreads blistered in 90 seconds, vegetables caramelized in cast iron, and dry-aged cuts rested over embers. Our menu changes with the market, but the fire never goes out.</p>
+        </div>
+        <ul class="about-points">
+          <li><strong>Open hearth</strong><span>Watch your dinner cook over Oregon white oak</span></li>
+          <li><strong>Local first</strong><span>92% of ingredients from within 150 miles</span></li>
+          <li><strong>Natural wines</strong><span>A 120-bottle low-intervention list</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="menu" class="section">
+      <div class="container">
+        <div class="section-head">
+          <p class="kicker">The menu</p>
+          <h2>Cooked over oak, served with care</h2>
+          <p>Our menu shifts with the seasons — here's what's on the pass this week.</p>
+        </div>
+        <div class="tabs" id="menuTabs" role="tablist" aria-label="Menu categories"></div>
+        <div class="menu-list" id="menuList"></div>
+        <p class="menu-note">Please tell us about allergies — most dishes can be adapted. A 20% service charge is shared with the whole team.</p>
+      </div>
+    </section>
+
+    <section id="hours" class="section section-alt">
+      <div class="container hours-grid">
+        <div>
+          <p class="kicker">Visit us</p>
+          <h2>Opening hours</h2>
+          <p class="hours-address">214 Alder Street, Portland, OR<br />(503) 555-0184</p>
+        </div>
+        <table class="hours-table" id="hoursTable" aria-label="Opening hours">
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="reserve" class="section">
+      <div class="container narrow">
+        <div class="section-head">
+          <p class="kicker">Reservations</p>
+          <h2>Book your table</h2>
+          <p>Tables are held for 15 minutes past reservation time. Parties of 7+ please call us directly.</p>
+        </div>
+        <form id="reserveForm" class="reserve-form" novalidate>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="rName">Full name</label>
+              <input type="text" id="rName" autocomplete="name" placeholder="Jordan Ellis" />
+              <small class="err" id="err-rName"></small>
+            </div>
+            <div class="form-group">
+              <label for="rPhone">Phone</label>
+              <input type="tel" id="rPhone" autocomplete="tel" placeholder="(503) 555-0100" />
+              <small class="err" id="err-rPhone"></small>
+            </div>
+          </div>
+          <div class="form-row cols-3">
+            <div class="form-group">
+              <label for="rDate">Date</label>
+              <input type="date" id="rDate" />
+              <small class="err" id="err-rDate"></small>
+            </div>
+            <div class="form-group">
+              <label for="rTime">Time</label>
+              <select id="rTime">
+                <option value="">Select...</option>
+              </select>
+              <small class="err" id="err-rTime"></small>
+            </div>
+            <div class="form-group">
+              <label for="rParty">Party size</label>
+              <select id="rParty">
+                <option value="">Select...</option>
+              </select>
+              <small class="err" id="err-rParty"></small>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="rNotes">Special requests <span class="optional">(optional)</span></label>
+            <textarea id="rNotes" rows="3" placeholder="Anniversary, high chair, dietary needs..."></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary btn-lg btn-block">Confirm reservation</button>
+        </form>
+        <div id="reserveSuccess" class="reserve-success" hidden>
+          <div class="success-check">&#10003;</div>
+          <h3>You're booked!</h3>
+          <p id="reserveSummary"></p>
+          <p class="fine">A confirmation text is on its way. We can't wait to host you.</p>
+          <button class="btn btn-ghost" id="bookAnother">Make another reservation</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <p class="logo">Ember <span>&amp;</span> Oak</p>
+        <p class="muted">Wood-fired kitchen in Portland, Oregon.</p>
+      </div>
+      <div>
+        <h4>Find us</h4>
+        <p class="muted">214 Alder Street<br />Portland, OR 97204</p>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <p class="muted">(503) 555-0184<br />hello@emberandoak.example</p>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <p>&copy; <span id="year"></span> Ember &amp; Oak. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
