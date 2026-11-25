@@ -112,3 +112,40 @@
     dateInput.max = iso(max);
   }
 })();
+
+
+/* === Polish pass 2026-11-25: scroll progress, back-to-top, floating embers, hero parallax === */
+(function () {
+  "use strict";
+  var reduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var bar = document.createElement("div");
+  bar.className = "scroll-progress"; bar.setAttribute("aria-hidden", "true");
+  document.body.appendChild(bar);
+  var topBtn = document.createElement("button");
+  topBtn.className = "back-to-top"; topBtn.type = "button";
+  topBtn.setAttribute("aria-label", "Back to top"); topBtn.textContent = "\u2191";
+  document.body.appendChild(topBtn);
+  topBtn.addEventListener("click", function () { window.scrollTo({ top: 0, behavior: reduced ? "auto" : "smooth" }); });
+  var hero = document.querySelector(".hero");
+  function onScroll() {
+    var h = document.documentElement;
+    var max = h.scrollHeight - h.clientHeight;
+    bar.style.width = (max > 0 ? (h.scrollTop / max) * 100 : 0) + "%";
+    topBtn.classList.toggle("show", h.scrollTop > 600);
+    if (hero && !reduced) hero.style.backgroundPositionY = "calc(50% + " + Math.min(h.scrollTop * 0.25, 120) + "px)";
+  }
+  window.addEventListener("scroll", onScroll, { passive: true }); onScroll();
+  if (hero && !reduced) {
+    for (var i = 0; i < 14; i++) {
+      var e = document.createElement("span");
+      e.className = "ember"; e.setAttribute("aria-hidden", "true");
+      var size = 4 + Math.random() * 7;
+      e.style.width = size + "px"; e.style.height = size + "px";
+      e.style.left = (Math.random() * 100) + "%";
+      e.style.animationDuration = (6 + Math.random() * 7) + "s";
+      e.style.animationDelay = (Math.random() * 8) + "s";
+      e.style.setProperty("--drift", (Math.random() * 60 - 30) + "px");
+      hero.appendChild(e);
+    }
+  }
+})();

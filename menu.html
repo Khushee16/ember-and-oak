@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <a class="skip-link" href="#main">Skip to main content</a>
   <header class="site-header" id="siteHeader">
     <nav class="nav-inner" aria-label="Main navigation">
       <a href="index.html" class="logo">Ember <span>&amp;</span> Oak</a>
@@ -27,7 +28,7 @@
     </nav>
   </header>
 
-  <main>
+  <main id="main">
     <section class="page-hero">
       <div class="container">
         <p class="kicker reveal">The menu</p>
@@ -39,7 +40,7 @@
     <section class="section">
       <div class="container">
         <div class="tabs" id="menuTabs" role="tablist" aria-label="Menu categories"></div>
-        <div class="menu-list" id="menuList"></div>
+        <div class="menu-list" id="menuList" role="tabpanel" aria-live="polite" aria-label="Menu items"></div>
         <p class="menu-note">Please tell us about allergies — most dishes can be adapted. A 20% service charge is shared with the whole team.</p>
         <div class="text-center mt-5">
           <a href="reservations.html" class="btn btn-primary btn-lg">Book a table to try it</a>

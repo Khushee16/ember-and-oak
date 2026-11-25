@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <a class="skip-link" href="#main">Skip to main content</a>
   <header class="site-header" id="siteHeader">
     <nav class="nav-inner" aria-label="Main navigation">
       <a href="index.html" class="logo">Ember <span>&amp;</span> Oak</a>
@@ -27,7 +28,7 @@
     </nav>
   </header>
 
-  <main>
+  <main id="main">
     <section class="hero">
       <div class="container hero-content">
         <p class="hero-kicker">Wood-fired kitchen &middot; Portland, OR</p>
@@ -43,7 +44,7 @@
           <div><strong>120 bottles</strong>Natural wine list</div>
         </div>
       </div>
-      <a href="#about" class="hero-scroll">Scroll</a>
+      <a href="#about" class="hero-scroll" aria-label="Scroll down to our story">Scroll</a>
     </section>
 
     <section class="about" id="about">

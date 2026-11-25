@@ -19,6 +19,7 @@
       var open = navLinks.classList.toggle("open");
       hamburger.classList.toggle("open", open);
       hamburger.setAttribute("aria-expanded", open ? "true" : "false");
+      hamburger.setAttribute("aria-label", open ? "Close menu" : "Open menu");
     });
     navLinks.addEventListener("click", function (e) {
       if (e.target.closest("a")) {
@@ -140,14 +141,26 @@
       btn.type = "button";
       btn.setAttribute("role", "tab");
       btn.setAttribute("aria-selected", i === 0 ? "true" : "false");
+      btn.tabIndex = i === 0 ? 0 : -1;
       btn.addEventListener("click", function () {
         tabsWrap.querySelectorAll(".tab").forEach(function (t) {
           t.classList.remove("active");
           t.setAttribute("aria-selected", "false");
+          t.tabIndex = -1;
         });
         btn.classList.add("active");
         btn.setAttribute("aria-selected", "true");
+        btn.tabIndex = 0;
         renderMenu(cat);
+      });
+      btn.addEventListener("keydown", function (e) {
+        var tabs = Array.prototype.slice.call(tabsWrap.querySelectorAll(".tab"));
+        var idx = tabs.indexOf(btn), next = null;
+        if (e.key === "ArrowRight") next = tabs[(idx + 1) % tabs.length];
+        if (e.key === "ArrowLeft") next = tabs[(idx - 1 + tabs.length) % tabs.length];
+        if (e.key === "Home") next = tabs[0];
+        if (e.key === "End") next = tabs[tabs.length - 1];
+        if (next) { e.preventDefault(); next.focus(); next.click(); }
       });
       tabsWrap.appendChild(btn);
     });
@@ -259,6 +272,7 @@
     if (!input || !err) return false;
     err.textContent = msg || "";
     input.classList.toggle("invalid", !!msg);
+    if (msg) input.setAttribute("aria-invalid", "true"); else input.removeAttribute("aria-invalid");
     return !msg;
   }
   function prettyDate(iso) {
@@ -316,7 +330,11 @@
       }
       ok = setError("rTime", !time ? "Please pick a time." : "") && ok;
       ok = setError("rParty", !party ? "Please choose your party size." : "") && ok;
-      if (!ok) return;
+      if (!ok) {
+        var firstBad = form.querySelector(".invalid");
+        if (firstBad) firstBad.focus();
+        return;
+      }
 
       var payload = {
         name: name,
@@ -384,4 +402,41 @@
   /* ---------- Footer year ---------- */
   var yearEl = document.getElementById("year");
   if (yearEl) yearEl.textContent = new Date().getFullYear();
+})();
+
+
+/* === Polish pass 2026-11-25: scroll progress, back-to-top, floating embers, hero parallax === */
+(function () {
+  "use strict";
+  var reduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var bar = document.createElement("div");
+  bar.className = "scroll-progress"; bar.setAttribute("aria-hidden", "true");
+  document.body.appendChild(bar);
+  var topBtn = document.createElement("button");
+  topBtn.className = "back-to-top"; topBtn.type = "button";
+  topBtn.setAttribute("aria-label", "Back to top"); topBtn.textContent = "\u2191";
+  document.body.appendChild(topBtn);
+  topBtn.addEventListener("click", function () { window.scrollTo({ top: 0, behavior: reduced ? "auto" : "smooth" }); });
+  var hero = document.querySelector(".hero");
+  function onScroll() {
+    var h = document.documentElement;
+    var max = h.scrollHeight - h.clientHeight;
+    bar.style.width = (max > 0 ? (h.scrollTop / max) * 100 : 0) + "%";
+    topBtn.classList.toggle("show", h.scrollTop > 600);
+    if (hero && !reduced) hero.style.backgroundPositionY = "calc(50% + " + Math.min(h.scrollTop * 0.25, 120) + "px)";
+  }
+  window.addEventListener("scroll", onScroll, { passive: true }); onScroll();
+  if (hero && !reduced) {
+    for (var i = 0; i < 14; i++) {
+      var e = document.createElement("span");
+      e.className = "ember"; e.setAttribute("aria-hidden", "true");
+      var size = 4 + Math.random() * 7;
+      e.style.width = size + "px"; e.style.height = size + "px";
+      e.style.left = (Math.random() * 100) + "%";
+      e.style.animationDuration = (6 + Math.random() * 7) + "s";
+      e.style.animationDelay = (Math.random() * 8) + "s";
+      e.style.setProperty("--drift", (Math.random() * 60 - 30) + "px");
+      hero.appendChild(e);
+    }
+  }
 })();

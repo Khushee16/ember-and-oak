@@ -19,6 +19,7 @@
   -->
 </head>
 <body>
+  <a class="skip-link" href="#main">Skip to main content</a>
   <header class="site-header" id="siteHeader">
     <nav class="nav-inner" aria-label="Main navigation">
       <a href="index.html" class="logo">Ember <span>&amp;</span> Oak</a>
@@ -34,7 +35,7 @@
     </nav>
   </header>
 
-  <main>
+  <main id="main">
     <section class="page-hero">
       <div class="container">
         <p class="kicker reveal">Reservations</p>
@@ -50,31 +51,33 @@
           <div class="form-row">
             <div class="form-group">
               <label for="rName">Full name</label>
-              <input type="text" id="rName" name="name" autocomplete="name" placeholder="Jordan Ellis" />
+              <input type="text" id="rName" name="name" autocomplete="name" placeholder="Jordan Ellis" aria-describedby="err-rName" />
               <small class="err" id="err-rName"></small>
             </div>
             <div class="form-group">
               <label for="rPhone">Phone</label>
-              <input type="tel" id="rPhone" name="phone" autocomplete="tel" placeholder="(503) 555-0100" />
+              <input type="tel" id="rPhone" name="phone" autocomplete="tel" placeholder="(503) 555-0100" aria-describedby="rPhoneHelp err-rPhone" />
+              <p class="form-helper" id="rPhoneHelp">We'll text your confirmation to this number.</p>
               <small class="err" id="err-rPhone"></small>
             </div>
           </div>
           <div class="form-row cols-3">
             <div class="form-group">
               <label for="rDate">Date</label>
-              <input type="date" id="rDate" name="date" />
+              <input type="date" id="rDate" name="date" aria-describedby="rDateHelp err-rDate" />
+              <p class="form-helper" id="rDateHelp">Book up to 60 days ahead.</p>
               <small class="err" id="err-rDate"></small>
             </div>
             <div class="form-group">
               <label for="rTime">Time</label>
-              <select id="rTime" name="time">
+              <select id="rTime" name="time" aria-describedby="err-rTime">
                 <option value="">Select...</option>
               </select>
               <small class="err" id="err-rTime"></small>
             </div>
             <div class="form-group">
               <label for="rParty">Party size</label>
-              <select id="rParty" name="party">
+              <select id="rParty" name="party" aria-describedby="err-rParty">
                 <option value="">Select...</option>
               </select>
               <small class="err" id="err-rParty"></small>
@@ -86,7 +89,7 @@
           </div>
           <button type="submit" class="btn btn-primary btn-lg btn-block" id="submitBtn">Confirm reservation</button>
         </form>
-        <div id="reserveSuccess" class="reserve-success" hidden>
+        <div id="reserveSuccess" class="reserve-success" role="status" hidden>
           <div class="success-check">&#10003;</div>
           <h3 id="successTitle">You're booked!</h3>
           <p id="reserveSummary"></p>
@@ -107,6 +110,7 @@
           <p class="text-muted mt-3">Kitchen closes 30 minutes before the dining room. The hearth is lit from noon every day.</p>
         </div>
         <table class="hours-table reveal reveal-delay-1" id="hoursTable" aria-label="Opening hours">
+          <caption class="visually-hidden">Opening hours by day of the week</caption>
           <tbody></tbody>
         </table>
       </div>
