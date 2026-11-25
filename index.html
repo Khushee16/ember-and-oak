@@ -4,133 +4,120 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Ember & Oak — wood-fired kitchen in Portland. Seasonal menu, open hearth, book your table." />
-  <title>Ember &amp; Oak — Wood-Fired Kitchen</title>
+  <title>Ember &amp; Oak — Wood-Fired Kitchen · Portland, OR</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500;1,9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <header class="site-header" id="siteHeader">
     <nav class="nav-inner" aria-label="Main navigation">
-      <a href="#home" class="logo">Ember <span>&amp;</span> Oak</a>
+      <a href="index.html" class="logo">Ember <span>&amp;</span> Oak</a>
       <button id="hamburger" class="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks">
         <span></span><span></span><span></span>
       </button>
       <ul id="navLinks" class="nav-links">
-        <li><a href="#home">Home</a></li>
-        <li><a href="#menu">Menu</a></li>
-        <li><a href="#hours">Hours</a></li>
-        <li><a href="#reserve" class="btn btn-primary nav-cta">Reserve a table</a></li>
+        <li><a href="index.html" class="active" aria-current="page">Home</a></li>
+        <li><a href="menu.html">Menu</a></li>
+        <li><a href="reservations.html">Hours</a></li>
+        <li><a href="reservations.html" class="btn btn-primary nav-cta">Reserve a table</a></li>
       </ul>
     </nav>
   </header>
 
   <main>
-    <section id="home" class="hero">
-      <div class="hero-overlay"></div>
+    <section class="hero">
       <div class="container hero-content">
         <p class="hero-kicker">Wood-fired kitchen &middot; Portland, OR</p>
         <h1>Slow food,<br />cooked over <em>live fire</em></h1>
         <p class="hero-sub">Seasonal Pacific Northwest ingredients, an oak-burning hearth, and a dining room built for lingering. Dinner Tuesday through Sunday.</p>
         <div class="hero-ctas">
-          <a href="#reserve" class="btn btn-primary btn-lg">Book a table</a>
-          <a href="#menu" class="btn btn-outline btn-lg">View the menu</a>
+          <a href="reservations.html" class="btn btn-primary btn-lg">Book a table</a>
+          <a href="menu.html" class="btn btn-outline-light btn-lg">View the menu</a>
+        </div>
+        <div class="hero-meta">
+          <div><strong>Tue – Sun</strong>Dinner from 5 PM</div>
+          <div><strong>214 Alder St</strong>Downtown Portland</div>
+          <div><strong>120 bottles</strong>Natural wine list</div>
         </div>
       </div>
+      <a href="#about" class="hero-scroll">Scroll</a>
     </section>
 
-    <section class="about">
+    <section class="about" id="about">
       <div class="container about-grid">
-        <div>
+        <div class="reveal">
+          <p class="kicker">Our story</p>
           <h2>From our hearth to your table</h2>
-          <p>Everything at Ember &amp; Oak touches oak fire before it touches your plate — flatbreads blistered in 90 seconds, vegetables caramelized in cast iron, and dry-aged cuts rested over embers. Our menu changes with the market, but the fire never goes out.</p>
+          <p class="lead">Everything at Ember &amp; Oak touches oak fire before it touches your plate — flatbreads blistered in 90 seconds, vegetables caramelized in cast iron, and dry-aged cuts rested over embers. Our menu changes with the market, but the fire never goes out.</p>
+          <div class="about-img">
+            <img src="https://picsum.photos/seed/ember-hearth/1000/620" alt="Glowing oak embers in the open hearth at Ember &amp; Oak" loading="lazy" />
+          </div>
         </div>
         <ul class="about-points">
-          <li><strong>Open hearth</strong><span>Watch your dinner cook over Oregon white oak</span></li>
-          <li><strong>Local first</strong><span>92% of ingredients from within 150 miles</span></li>
-          <li><strong>Natural wines</strong><span>A 120-bottle low-intervention list</span></li>
+          <li class="reveal reveal-delay-1"><strong>Open hearth</strong><span>Watch your dinner cook over Oregon white oak</span></li>
+          <li class="reveal reveal-delay-2"><strong>Local first</strong><span>Most ingredients from within 150 miles of Portland</span></li>
+          <li class="reveal reveal-delay-3"><strong>Natural wines</strong><span>A 120-bottle low-intervention list</span></li>
         </ul>
       </div>
     </section>
 
-    <section id="menu" class="section">
+    <section class="feature-strip">
       <div class="container">
-        <div class="section-head">
-          <p class="kicker">The menu</p>
-          <h2>Cooked over oak, served with care</h2>
-          <p>Our menu shifts with the seasons — here's what's on the pass this week.</p>
+        <div class="section-head reveal">
+          <p class="kicker">Why Ember &amp; Oak</p>
+          <h2>A dining room built for lingering</h2>
+          <div class="rule"></div>
         </div>
-        <div class="tabs" id="menuTabs" role="tablist" aria-label="Menu categories"></div>
-        <div class="menu-list" id="menuList"></div>
-        <p class="menu-note">Please tell us about allergies — most dishes can be adapted. A 20% service charge is shared with the whole team.</p>
+        <div class="row g-4">
+          <div class="col-md-4 reveal">
+            <div class="feature-card">
+              <div class="feature-icon" aria-hidden="true">&#128293;</div>
+              <h3>Live fire, always</h3>
+              <p>No gas, no electric — just Oregon white oak, cast iron, and patience. The hearth is lit at noon and never goes out during service.</p>
+            </div>
+          </div>
+          <div class="col-md-4 reveal reveal-delay-1">
+            <div class="feature-card">
+              <div class="feature-icon" aria-hidden="true">&#127806;</div>
+              <h3>Market-driven menu</h3>
+              <p>The menu is rewritten every week around the morning market run. What's on the pass tonight was in the ground this morning.</p>
+            </div>
+          </div>
+          <div class="col-md-4 reveal reveal-delay-2">
+            <div class="feature-card">
+              <div class="feature-icon" aria-hidden="true">&#127863;</div>
+              <h3>Natural wine</h3>
+              <p>A 120-bottle low-intervention list, poured by people who love talking about it — ask for a pairing with anything on the menu.</p>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
-    <section id="hours" class="section section-alt">
-      <div class="container hours-grid">
-        <div>
-          <p class="kicker">Visit us</p>
-          <h2>Opening hours</h2>
-          <p class="hours-address">214 Alder Street, Portland, OR<br />(503) 555-0184</p>
+    <section class="section section-alt" id="taste">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="kicker">A taste of the menu</p>
+          <h2>From the hearth tonight</h2>
+          <p>A few favorites from the pass — the full menu changes weekly.</p>
+          <div class="rule"></div>
         </div>
-        <table class="hours-table" id="hoursTable" aria-label="Opening hours">
-          <tbody></tbody>
-        </table>
+        <div class="row g-4" id="featuredDishes"></div>
+        <div class="text-center mt-5 reveal">
+          <a href="menu.html" class="btn btn-primary btn-lg">See the full menu</a>
+        </div>
       </div>
     </section>
 
-    <section id="reserve" class="section">
-      <div class="container narrow">
-        <div class="section-head">
-          <p class="kicker">Reservations</p>
-          <h2>Book your table</h2>
-          <p>Tables are held for 15 minutes past reservation time. Parties of 7+ please call us directly.</p>
-        </div>
-        <form id="reserveForm" class="reserve-form" novalidate>
-          <div class="form-row">
-            <div class="form-group">
-              <label for="rName">Full name</label>
-              <input type="text" id="rName" autocomplete="name" placeholder="Jordan Ellis" />
-              <small class="err" id="err-rName"></small>
-            </div>
-            <div class="form-group">
-              <label for="rPhone">Phone</label>
-              <input type="tel" id="rPhone" autocomplete="tel" placeholder="(503) 555-0100" />
-              <small class="err" id="err-rPhone"></small>
-            </div>
-          </div>
-          <div class="form-row cols-3">
-            <div class="form-group">
-              <label for="rDate">Date</label>
-              <input type="date" id="rDate" />
-              <small class="err" id="err-rDate"></small>
-            </div>
-            <div class="form-group">
-              <label for="rTime">Time</label>
-              <select id="rTime">
-                <option value="">Select...</option>
-              </select>
-              <small class="err" id="err-rTime"></small>
-            </div>
-            <div class="form-group">
-              <label for="rParty">Party size</label>
-              <select id="rParty">
-                <option value="">Select...</option>
-              </select>
-              <small class="err" id="err-rParty"></small>
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="rNotes">Special requests <span class="optional">(optional)</span></label>
-            <textarea id="rNotes" rows="3" placeholder="Anniversary, high chair, dietary needs..."></textarea>
-          </div>
-          <button type="submit" class="btn btn-primary btn-lg btn-block">Confirm reservation</button>
-        </form>
-        <div id="reserveSuccess" class="reserve-success" hidden>
-          <div class="success-check">&#10003;</div>
-          <h3>You're booked!</h3>
-          <p id="reserveSummary"></p>
-          <p class="fine">A confirmation text is on its way. We can't wait to host you.</p>
-          <button class="btn btn-ghost" id="bookAnother">Make another reservation</button>
-        </div>
+    <section class="section">
+      <div class="container narrow text-center reveal">
+        <p class="kicker">Reservations</p>
+        <h2 class="mb-3">Hungry? Save your seat.</h2>
+        <p class="text-muted mb-4">Tables are held for 15 minutes past reservation time. Parties of 7+ please call us directly at (503) 555-0184.</p>
+        <a href="reservations.html" class="btn btn-primary btn-lg">Book a table</a>
       </div>
     </section>
   </main>
@@ -151,10 +138,12 @@
       </div>
     </div>
     <div class="container footer-bottom">
-      <p>&copy; <span id="year"></span> Ember &amp; Oak. All rights reserved.</p>
+      <p class="mb-0">&copy; <span id="year"></span> Ember &amp; Oak. All rights reserved.</p>
+      <p class="mb-0">Fictional restaurant — a portfolio demo.</p>
     </div>
   </footer>
 
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
   <script src="script.js"></script>
 </body>
 </html>

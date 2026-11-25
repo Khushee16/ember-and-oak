@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Reserve a table at Ember & Oak, Portland — and see our opening hours." />
+  <title>Reservations — Ember &amp; Oak · Wood-Fired Kitchen</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500;1,9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
+  <link rel="stylesheet" href="style.css" />
+  <!--
+    BACKEND NOTE: this form POSTs to reserve.php, a plain PHP script that
+    validates the booking and stores it in data/reservations.json. That only
+    works on a host with PHP. On GitHub Pages (static hosting) or file://
+    there is no backend, so the form shows a clearly-labelled demo success
+    state instead — it never pretends a real booking was made. See README.md.
+  -->
+</head>
+<body>
+  <header class="site-header" id="siteHeader">
+    <nav class="nav-inner" aria-label="Main navigation">
+      <a href="index.html" class="logo">Ember <span>&amp;</span> Oak</a>
+      <button id="hamburger" class="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks">
+        <span></span><span></span><span></span>
+      </button>
+      <ul id="navLinks" class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="menu.html">Menu</a></li>
+        <li><a href="reservations.html" class="active" aria-current="page">Hours</a></li>
+        <li><a href="reservations.html" class="btn btn-primary nav-cta">Reserve a table</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="page-hero">
+      <div class="container">
+        <p class="kicker reveal">Reservations</p>
+        <h1 class="reveal">Book your <em>table</em></h1>
+        <p class="reveal reveal-delay-1">Tables are held for 15 minutes past reservation time. Parties of 7+ please call us directly.</p>
+      </div>
+    </section>
+
+    <section class="section" id="reserve">
+      <div class="container narrow">
+        <form id="reserveForm" class="reserve-form" action="reserve.php" method="post" novalidate>
+          <div class="form-error" id="formError" role="alert"></div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="rName">Full name</label>
+              <input type="text" id="rName" name="name" autocomplete="name" placeholder="Jordan Ellis" />
+              <small class="err" id="err-rName"></small>
+            </div>
+            <div class="form-group">
+              <label for="rPhone">Phone</label>
+              <input type="tel" id="rPhone" name="phone" autocomplete="tel" placeholder="(503) 555-0100" />
+              <small class="err" id="err-rPhone"></small>
+            </div>
+          </div>
+          <div class="form-row cols-3">
+            <div class="form-group">
+              <label for="rDate">Date</label>
+              <input type="date" id="rDate" name="date" />
+              <small class="err" id="err-rDate"></small>
+            </div>
+            <div class="form-group">
+              <label for="rTime">Time</label>
+              <select id="rTime" name="time">
+                <option value="">Select...</option>
+              </select>
+              <small class="err" id="err-rTime"></small>
+            </div>
+            <div class="form-group">
+              <label for="rParty">Party size</label>
+              <select id="rParty" name="party">
+                <option value="">Select...</option>
+              </select>
+              <small class="err" id="err-rParty"></small>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="rNotes">Special requests <span class="optional">(optional)</span></label>
+            <textarea id="rNotes" name="notes" rows="3" placeholder="Anniversary, high chair, dietary needs..."></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary btn-lg btn-block" id="submitBtn">Confirm reservation</button>
+        </form>
+        <div id="reserveSuccess" class="reserve-success" hidden>
+          <div class="success-check">&#10003;</div>
+          <h3 id="successTitle">You're booked!</h3>
+          <p id="reserveSummary"></p>
+          <p class="demo-badge" id="demoBadge" hidden>Demo mode — no backend connected</p>
+          <p class="fine" id="successFine">A confirmation text is on its way. We can't wait to host you.</p>
+          <button class="btn btn-ghost" id="bookAnother">Make another reservation</button>
+          <p class="demo-note" id="demoNote" hidden>This is a front-end demo on static hosting — no reservation was stored. On a PHP host the same form saves to the restaurant's booking file.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-alt" id="hours">
+      <div class="container hours-grid">
+        <div class="reveal">
+          <p class="kicker">Visit us</p>
+          <h2>Opening hours</h2>
+          <p class="hours-address"><strong>214 Alder Street, Portland, OR</strong><br />(503) 555-0184<br />hello@emberandoak.example</p>
+          <p class="text-muted mt-3">Kitchen closes 30 minutes before the dining room. The hearth is lit from noon every day.</p>
+        </div>
+        <table class="hours-table reveal reveal-delay-1" id="hoursTable" aria-label="Opening hours">
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <p class="logo">Ember <span>&amp;</span> Oak</p>
+        <p class="muted">Wood-fired kitchen in Portland, Oregon.</p>
+      </div>
+      <div>
+        <h4>Find us</h4>
+        <p class="muted">214 Alder Street<br />Portland, OR 97204</p>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <p class="muted">(503) 555-0184<br />hello@emberandoak.example</p>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <p class="mb-0">&copy; <span id="year"></span> Ember &amp; Oak. All rights reserved.</p>
+      <p class="mb-0">Fictional restaurant — a portfolio demo.</p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  <script src="script.js"></script>
+</body>
+</html>
